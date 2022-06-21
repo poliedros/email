@@ -1,9 +1,8 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { EmailModule } from './email/email.module';
-import { SMTP_TRANSPORTER } from './email/constants';
-import { EmailService } from './email/email.service';
+import { SMTP_TRANSPORTER } from './constants';
+import { EmailService } from './email.service';
 import { createTransport } from 'nodemailer';
-import { SmtpOptions } from './email/interfaces/smtp-options.interface';
+import { SmtpOptions } from './interfaces/smtp-options.interface';
 
 export const transporterFactory = (smtpOptions: SmtpOptions) => ({
   provide: SMTP_TRANSPORTER,
@@ -24,10 +23,10 @@ export const transporterFactory = (smtpOptions: SmtpOptions) => ({
 @Module({
   imports: [EmailModule],
 })
-export class CzarLibModule {
+export class EmailModule {
   public static register(smtpOptions: SmtpOptions): DynamicModule {
     return {
-      module: CzarLibModule,
+      module: EmailModule,
       providers: [transporterFactory(smtpOptions)],
       exports: [EmailService, transporterFactory],
     };

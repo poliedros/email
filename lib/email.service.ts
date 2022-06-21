@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { createTransport, Transport } from 'nodemailer';
+import { Transport } from 'nodemailer';
 import { SMTP_CONFIG_OPTIONS } from './constants';
 
 interface IEmailService {
