@@ -7,9 +7,6 @@
 
   <p align="center">Nest Czar Poliedros© libs</p>
     <p align="center">
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
 
