@@ -1,13 +1,13 @@
 {
-  "name": "@czarpoliedros/lib",
-  "version": "0.0.8",
+  "name": "@czarpoliedros/email",
+  "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Czar Poleidros",
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "build": "del -rf dist && tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
     "prepublish:npm": "npm run build",
     "publish:npm": "npm publish --access public",
     "prepublish:next": "npm run build",
