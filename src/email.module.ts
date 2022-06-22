@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { EMAIL_SERVICE } from './constants';
+import { SMTP_CONFIG_OPTIONS } from './constants';
 import { EmailService } from './email.service';
 import { createTransport } from 'nodemailer';
 import { SmtpOptions } from './interfaces/smtp-options.interface';
@@ -9,7 +9,7 @@ import { SmtpOptions } from './interfaces/smtp-options.interface';
 export class EmailModule {
   public static forRoot(smtpOptions: SmtpOptions): DynamicModule {
     const transporter = createTransport({
-      host: 'smtp.czar.dev',
+      host: 'mail.czar.dev',
       port: 465,
       auth: {
         user: smtpOptions.email,
@@ -17,16 +17,15 @@ export class EmailModule {
       },
     });
 
-    const emailService = new EmailService(transporter);
-
-    const emailServiceProvider = {
-      provide: EMAIL_SERVICE,
-      useValue: emailService,
-    };
-
     return {
       module: EmailModule,
-      providers: [emailServiceProvider],
+      providers: [
+        {
+          provide: SMTP_CONFIG_OPTIONS,
+          useValue: transporter,
+        },
+        EmailService,
+      ],
       exports: [EmailService],
       global: true,
     };
