@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Transport } from 'nodemailer';
+import { SentMessageInfo, Transporter } from 'nodemailer';
 import { SMTP_CONFIG_OPTIONS } from './constants';
 
 interface IEmailService {
@@ -11,9 +11,13 @@ interface IEmailService {
     body_html: string,
   ): Promise<void>;
 }
+
 @Injectable()
 export class EmailService implements IEmailService {
-  constructor(@Inject(SMTP_CONFIG_OPTIONS) private transporter: Transport) {}
+  constructor(
+    @Inject(SMTP_CONFIG_OPTIONS)
+    private transporter: Transporter<SentMessageInfo>,
+  ) {}
 
   async sendMail(
     from: string,
@@ -30,6 +34,6 @@ export class EmailService implements IEmailService {
       html: body_html,
     };
 
-    await this.transporter.mailer.sendMail(mail);
+    await this.transporter.sendMail(mail);
   }
 }

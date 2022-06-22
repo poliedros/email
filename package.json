@@ -1,9 +1,12 @@
 {
   "name": "@czarpoliedros/email",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
-  "author": "Czar Poleidros",
+  "author": "Czar Poliedros",
   "license": "UNLICENSED",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "https://github.com/poliedros/email",
   "scripts": {
     "prebuild": "rimraf dist",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -67,5 +70,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }

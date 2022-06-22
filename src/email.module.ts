@@ -1,13 +1,14 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { SMTP_TRANSPORTER } from './constants';
+import { EMAIL_SERVICE } from './constants';
 import { EmailService } from './email.service';
 import { createTransport } from 'nodemailer';
 import { SmtpOptions } from './interfaces/smtp-options.interface';
 
-export const transporterFactory = (smtpOptions: SmtpOptions) => ({
-  provide: SMTP_TRANSPORTER,
-  useFactory: () => {
-    return createTransport({
+@Global()
+@Module({})
+export class EmailModule {
+  public static forRoot(smtpOptions: SmtpOptions): DynamicModule {
+    const transporter = createTransport({
       host: 'smtp.czar.dev',
       port: 465,
       auth: {
@@ -15,20 +16,19 @@ export const transporterFactory = (smtpOptions: SmtpOptions) => ({
         pass: smtpOptions.password,
       },
     });
-  },
-  inject: [EmailService],
-});
 
-@Global()
-@Module({
-  imports: [EmailModule],
-})
-export class EmailModule {
-  public static register(smtpOptions: SmtpOptions): DynamicModule {
+    const emailService = new EmailService(transporter);
+
+    const emailServiceProvider = {
+      provide: EMAIL_SERVICE,
+      useValue: emailService,
+    };
+
     return {
       module: EmailModule,
-      providers: [transporterFactory(smtpOptions)],
-      exports: [EmailService, transporterFactory],
+      providers: [emailServiceProvider],
+      exports: [EmailService],
+      global: true,
     };
   }
 }
