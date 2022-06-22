@@ -1,6 +1,6 @@
 {
   "name": "@czarpoliedros/email",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "author": "Czar Poliedros",
   "license": "UNLICENSED",
@@ -8,7 +8,7 @@
   "types": "lib/index.d.ts",
   "repository": "https://github.com/poliedros/email",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf lib",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "build": "tsc -p tsconfig.build.json",
     "prepublish:npm": "del lib && npm run build",
