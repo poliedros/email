@@ -11,7 +11,7 @@
 ## Installation
 
 ```bash
-$ npm install
+$ npm i @czarpoliedros/email
 ```
 
 ## Usage
