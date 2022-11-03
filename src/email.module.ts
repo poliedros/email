@@ -9,8 +9,8 @@ import { SmtpOptions } from './interfaces/smtp-options.interface';
 export class EmailModule {
   public static forRoot(smtpOptions: SmtpOptions): DynamicModule {
     const transporter = createTransport({
-      host: 'mail.czar.dev',
-      port: 465,
+      host: smtpOptions.host,
+      port: smtpOptions.port,
       auth: {
         user: smtpOptions.email,
         pass: smtpOptions.password,

@@ -23,14 +23,15 @@ describe('EmailService', () => {
 
   it('should send email', async () => {
     let sendMail = false;
+    transporterMock.verify.mockReturnValue(Promise.resolve(true));
     transporterMock.sendMail.mockImplementation(async () => (sendMail = true));
-    await service.sendMail(
-      'test@test.com',
-      'to@to.com',
-      'Email sent',
-      'body',
-      '<p>body</p>',
-    );
+    await service.sendMail({
+      from: 'test@test.com',
+      to: 'to@to.com',
+      subject: 'Email sent',
+      body: 'body',
+      body_html: '<p>body</p>',
+    });
 
     expect(sendMail).toBeTruthy();
   });
