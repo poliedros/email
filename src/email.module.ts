@@ -11,6 +11,7 @@ export class EmailModule {
     const transporter = createTransport({
       host: smtpOptions.host,
       port: smtpOptions.port,
+      secure: smtpOptions.secure,
       auth: {
         user: smtpOptions.email,
         pass: smtpOptions.password,

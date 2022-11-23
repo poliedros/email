@@ -18,4 +18,9 @@ export interface SmtpOptions {
    * password
    */
   password: string;
+
+  /**
+   * secure
+   */
+  secure: boolean;
 }
