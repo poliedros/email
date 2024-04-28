@@ -16,9 +16,6 @@ export class EmailModule {
         user: smtpOptions.email,
         pass: smtpOptions.password,
       },
-      tls: {
-        ciphers: 'SSLv3',
-      },
     });
 
     return {
